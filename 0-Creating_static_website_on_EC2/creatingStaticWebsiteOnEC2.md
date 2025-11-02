@@ -1,5 +1,3 @@
-PROJECT:0-Creating_static_website_on_EC2
-
 # Creating a Static Website on Amazon EC2
 In this project, I created a static website and hosted it on a web server running on an AWS EC2 instance. I needed to create a new EC2 instance, setup a connection to the instance, and install a web server to host the website. There was also some security group settings I needed to add in order to create an ssh connection to the instance and allow web traffic to your server. Once everything was configured, I was able to use the public address of the EC2 instance to access the site from a web browser.
 
