@@ -31,7 +31,9 @@ This project will allowed me to gain experience in using several AWS services in
 - **Virtual Private Cloud (VPC)**: Lets you provision a section of the AWS cloud where you can launch resources on a virtual network that you define. This includes being able to select your own ip address ranges, create subnets, and configure your routing tables and network gateways.
 - **Identity and Access Management (IAM)**: Service for managing user access to AWS applications and services. It provides fine-grained access control through IAM policies. it is offered at no addtional charge.
 #### Visualization
-![image](./zero/labs/AWS-labs/0-Creating_static_website_on_EC2/project-0.png)
+![image](./rolsamps/aws_projects/0-Creating_static_website_on_EC2/project-0.png)
+
+
 ### Capabilities
 Working on this project provided an opportunity for me to develop skills in performing engineering tasks for the cloud including:
 - **EC2**: Able to create ec2 instances, understanding different instance types, starting and stopping instance, use ssh to connect to instance, create new ssh key pairs.
