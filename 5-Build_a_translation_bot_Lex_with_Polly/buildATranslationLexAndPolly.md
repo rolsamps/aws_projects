@@ -44,15 +44,15 @@ Working on this project provided an opportunity to gain experience in performing
 #### 6. Test and Refine Lex bot and lambda function code
 #### 7. Deploy the Bot with Slack for real-world messaging platform
 ### Questions
-## What is Amazon Polly and how does it work to create lifelike speech?
+#### What is Amazon Polly and how does it work to create lifelike speech?
 Amazon Polly supports multiple languages and includes a variety of lifelike voices which you can use to create apps with synthesized speech to increase engagement and availability for users. It uses Neural TTS to analyze text and generate context and pronunciation with many voice options available. Poly integrates with Lambda through the boto3 client and uses these 3 key operations: text-to-speech synthesis, voice selections, and audio storage.
-## What strategies can be used to handle long Polly synthesis tasks?
+#### What strategies can be used to handle long Polly synthesis tasks?
 Amazon Polly provides long-form TTS for texts over 3,000 characters using asynchronous synthesis tasks that can handle up to 200,000 characters. With Asynchronous synthesis tasks, you can implement polling mechanism with timeout and status checking for better optimization with the execution of the task and error handling. 
-## What is a dialog action?
+#### What is a dialog action?
 The interaction from backend to frontend is handled through specific states called Dialog Actions. These define the next action that the bot must perform in its interaction with the user. The dialog flow follows three main states: Delegate (assigns Amazon Lex to determine the next step automatically), ElicitSlot (prompts the user to provide a specific slot value), and ElicitIntent (prompts the user to express or clarify their intent).
-## How to make audio files accessible to users?
+#### How to make audio files accessible to users?
 Use S3 presigned URLs with appropriate expiration times, presigned URLs provide temporary access to audio files.
-## Can you move an s3 bucket to another region without having to recreate it?
+#### Can you move an s3 bucket to another region without having to recreate it?
 No, S3 buckets cannot be moved to another region without recreating them. S3 buckets are permanently bound to their creation region due to three key constraints: buckets are region-specific resources that remain in their original location, bucket names must be globally unique across all regions, and each AWS region maintains separate S3 infrastructure that cannot be transferred.
 ### References
 - **Integrating an AWS Lambda function into your bot?**:
