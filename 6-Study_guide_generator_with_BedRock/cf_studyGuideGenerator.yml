@@ -1,0 +1,150 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: cf_studyGuideGenerator
+
+Parameters:
+  BucketName:
+    Type: String
+    Description: Name for the S3 bucket
+    Default: ro8830studyguidegenerator
+  TopicName:
+    Type: String
+    Description: Name for the SNS topic
+    Default: topic-studyGuideGenerator
+  EmailAddress:
+    Type: String
+    Description: Email address for SNS notifications
+    Default: SolandorGoldwyn@proton.me
+  LFunctionName:
+    Type: String
+    Description: Name for the Lambda function
+    Default: studyGuideGeneratorC
+
+Resources:
+  # S3 Bucket
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref BucketName
+
+  # SNS Topic
+  SNSTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: !Ref TopicName
+
+  # SNS Email Subscription
+  SNSSubscription:
+    Type: AWS::SNS::Subscription
+    Properties:
+      Protocol: email
+      TopicArn: !Ref SNSTopic
+      Endpoint: !Ref EmailAddress
+
+  # Lambda Execution Role
+  LambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: custom_studyGuideGenerator
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: s3:GetObject
+                Resource: !Sub ${S3Bucket.Arn}/*
+              - Effect: Allow
+                Action: sns:Publish
+                Resource: !Ref SNSTopic
+              - Effect: Allow
+                Action: bedrock:InvokeModel
+                Resource: '*'
+              - Effect: Allow
+                Action: 
+                - aws-marketplace:ViewSubscriptions
+                - aws-marketplace:Subscribe
+                Resource: '*'
+
+  # Lambda Function
+  LambdaFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Ref LFunctionName
+      Runtime: python3.9
+      Handler: index.lambda_handler
+      Role: !GetAtt LambdaRole.Arn
+      Environment:
+        Variables:
+          BUCKET_NAME: !Ref S3Bucket
+          TOPIC_ARN: !Ref SNSTopic
+      Code:
+        ZipFile: |
+          import json
+          import boto3
+          import os
+
+          def lambda_handler(event, context):
+              s3 = boto3.client('s3')
+              sns = boto3.client('sns')
+              bedrock = boto3.client('bedrock-runtime', region_name='us-east-1')
+
+
+              bucket_name = os.environ['BUCKET_NAME']
+              topic_arn = os.environ['TOPIC_ARN']
+              topic_file_key = event.get('topic_key', 'test_topic_file.txt')
+              prompt_file_key = event.get('prompt_key', 'test_prompt_file.txt')
+
+              try:
+
+                  topic = s3.get_object(Bucket=bucket_name, Key=topic_file_key)
+                  topic_file_content = topic['Body'].read().decode('utf-8')
+
+                  prompt = s3.get_object(Bucket=bucket_name, Key=prompt_file_key)
+                  prompt_file_content = prompt['Body'].read().decode('utf-8')
+
+
+
+                  response = bedrock.invoke_model(
+                      modelId='anthropic.claude-3-sonnet-20240229-v1:0',
+                      body=json.dumps({
+                          'anthropic_version': 'bedrock-2023-05-31',
+                          'max_tokens': 1000,
+                          'messages': [{'role': 'user', 'content': f'{prompt_file_content}. Using this content: {topic_file_content}'}]
+                      })
+                  )
+
+                  response_body = json.loads(response['body'].read())
+                  ai_response = response_body['content'][0]['text']
+
+                  sns.publish(
+                      TopicArn=topic_arn,
+                      Message=ai_response,
+                      Subject='Response Content from S3'
+                  )
+
+                  return {
+                      'statusCode': 200,
+                      'body': json.dumps('Email sent successfully')
+                  }
+
+              except Exception as e:
+                  return {
+                      'statusCode': 500,
+                      'body': json.dumps(f'Error: {str(e)}')
+                  }
+
+Outputs:
+  BucketName:
+    Value: !Ref S3Bucket
+  LambdaFunctionName:
+    Value: !Ref LambdaFunction
+  TopicArn:
+    Value: !Ref SNSTopic

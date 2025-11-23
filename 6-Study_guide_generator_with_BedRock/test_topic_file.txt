@@ -1,0 +1,58 @@
+AWS Certified Cloud Practitioner (CLF-C02)
+Introduction
+The AWS Certified Cloud Practitioner (CLF-C02) exam is intended for individuals who
+can effectively demonstrate overall knowledge of the AWS Cloud, independent of a
+specific job role.
+The exam also validates a candidate’s ability to complete the following tasks:
+ Explain the value of the AWS Cloud.
+ Understand and explain the AWS shared responsibility model.
+ Understand the AWS Well-Architected Framework.
+ Understand security best practices.
+ Understand AWS Cloud costs, economics, and billing practices.
+ Describe and position the core AWS services, including compute, network,
+database, and storage services.
+ Identify AWS services for common use cases.
+Target candidate description
+The target candidate has up to 6 months of exposure to AWS Cloud design,
+implementation, and/or operations. The candidate might be in the early stages of
+pursuing an AWS Cloud career or the candidate might work with people in AWS Cloud
+roles.
+Recommended AWS knowledge
+The target candidate should have AWS knowledge in the following areas:
+ AWS Cloud concepts
+ Security and compliance in the AWS Cloud
+ Core AWS services
+ Economics of the AWS Cloud
+
+The exam has the following content domains and weightings:
+ Domain 1: Cloud Concepts (24% of scored content)
+ Domain 2: Security and Compliance (30% of scored content)
+ Domain 3: Cloud Technology and Services (34% of scored content)
+ Domain 4: Billing, Pricing, and Support (12% of scored content)
+
+Domain 1: Cloud Concepts
+Task Statement 1.1: Define the benefits of the AWS Cloud.
+Task Statement 1.2: Identify design principles of the AWS Cloud.
+Task Statement 1.3: Understand the benefits of and strategies for migration to the
+Task Statement 1.4: Understand concepts of cloud economics.
+Domain 2: Security and Compliance
+Task Statement 2.1: Understand the AWS shared responsibility model.
+Task Statement 2.2: Understand AWS Cloud security, governance, and compliance
+concepts.
+Task Statement 2.3: Identify AWS access management capabilities.
+Task Statement 2.4: Identify components and resources for security.
+Domain 3: Cloud Technology and Services
+Task Statement 3.1: Define methods of deploying and operating in the AWS Cloud.
+Knowledge of:
+Task Statement 3.2: Define the AWS global infrastructure.
+Knowledge of:
+Task Statement 3.3: Identify AWS compute services.
+Task Statement 3.4: Identify AWS database services.
+Task Statement 3.5: Identify AWS network services.
+Task Statement 3.6: Identify AWS storage services.
+Task Statement 3.7: Identify AWS artificial intelligence and machine learning (AI/ML)
+Task Statement 3.8: Identify services from other in-scope AWS service categories.
+Domain 4: Billing, Pricing, and Support
+Task Statement 4.1: Compare AWS pricing models.
+Task Statement 4.2: Understand resources for billing, budget, and cost management.
+Task Statement 4.3: Identify AWS technical resources and AWS Support options.
