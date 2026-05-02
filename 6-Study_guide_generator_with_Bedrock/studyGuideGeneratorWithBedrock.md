@@ -1,5 +1,5 @@
 
-# Study Guide Generator With Bedrock
+# Study Guide Generator with Bedrock
 This project uses Amazon Bedrock's foundational models to generate test questions for AWS certification study guides. The system reads exam description and list of topics covered from text files stored in an S3 bucket, which the AI model uses to generate relevant content. The generated output is then delivered to users via email through AWS SNS. The project focuses on implementing core functionalities by applying several simplification strategies. The system uses minimal error handling to maintain simplicity. The AI model employs a basic prompt structure with the format "Create 3 quiz questions from this text: [content]" for content generation. All emails and S3 files use plain text formatting without HTML to reduce complexity. The S3 bucket name is hardcoded directly in the application code for straightforward implementation. Finally, CloudFormation handles all infrastructure deployment to ensure consistent resource provisioning.
 ### Key Resources
 - **CloudFormation template**: 
