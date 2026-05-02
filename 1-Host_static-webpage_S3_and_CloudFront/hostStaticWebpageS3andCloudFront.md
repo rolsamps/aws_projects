@@ -1,4 +1,4 @@
-# 1-Host_static-webpage_S3_and_CloudFront
+# Host a static webpage on S3 and CloudFront
 The objective for this project is to create a static webpage by leveraging S3 for file storage and CloudFront for fast global content delivery. This will provide practical hands-on experience working with the AWS storage and CDN services. You will also be able to examine different methods to securing a connection between S3 and CloudFront.
 ### Key Resources
 - **Content Delivery Network (CDN)**: 
